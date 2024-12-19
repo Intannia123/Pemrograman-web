@@ -9,130 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Add Font Awesome for stars -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-
-    <style>
-        /* Background snow effect */
-        body {
-            background-image: url('https://www.w3schools.com/w3images/snow.jpg');
-            background-size: cover;
-            background-position: center center;
-            background-attachment: fixed;
-            color: #fff;
-        }
-
-        .navbar {
-            background-color: rgba(0, 0, 0, 0.7);
-        }
-
-        .card-body {
-            background-color: rgba(0, 0, 0, 0.6);
-            color: #fff;
-        }
-
-        .modal-content {
-            background-color: rgba(0, 0, 0, 0.8);
-            color: #fff;
-        }
-
-        .footer {
-            background-color: rgba(0, 0, 0, 0.7);
-        }
-
-        .search-bar {
-            font-size: 1.2rem;
-            padding: 10px;
-            border-radius: 30px;
-        }
-
-        .search-bar:focus {
-            box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
-        }
-
-        #button-search {
-            font-size: 1.2rem;
-            padding: 10px 20px;
-            border-radius: 30px;
-            margin-left: 10px;
-            border: none;
-        }
-
-        .navbar-brand {
-            font-size: 2rem !important;
-            font-weight: bold;
-            color: #fff !important;
-            text-transform: uppercase;
-            letter-spacing: 5px;
-        }
-
-        .film-card {
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-
-        .film-card:hover {
-            transform: scale(1.05);
-        }
-
-        .modal-body {
-            max-height: 400px;
-            overflow-y: auto;
-        }
-
-        .modal-header {
-            background-color: #2d6ac5;
-            color: white;
-        }
-
-        .modal-title {
-            font-size: 3rem;
-            font-weight: bold;
-        }
-
-        #modal-description {
-            font-size: 1.25rem;
-        }
-
-        #reviews-list p {
-            font-size: 1.1rem;
-        }
-
-        .card-title {
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-
-        .card-text {
-            font-size: 1.2rem;
-        }
-
-        .review {
-            margin-bottom: 20px;
-        }
-
-        .user-name {
-            font-weight: bold;
-        }
-
-        .star-rating {
-            margin-top: 5px;
-        }
-
-        .star-rating i {
-            font-size: 1.2rem;
-        }
-
-        /* Styling for all reviews section */
-        #reviews-section {
-            display: none;
-        }
-
-        .review-card {
-            background-color: rgba(0, 0, 0, 0.6);
-            margin-bottom: 15px;
-            padding: 15px;
-            border-radius: 10px;
-        }
-    </style>
+    <link rel="stylesheet" href="film.css">
 </head>
 
 <body>
@@ -265,7 +142,7 @@
             data-bs-reviews="Mikha, 5, Magical and unforgettable; Sunghoon, 4, Fun and adventurous; Jihyo, 5, A childhood favorite"
             data-bs-genre="Fantasy" data-bs-actors="Daniel Radcliffe, Emma Watson" data-bs-rating="7.9/10">
             <div class="card">
-                <img src="https://m.media-amazon.com/images/M/MV5BNTU1MzgyMDMtMzBlZS00YzczLThmYWEtMjU3YmFlOWEyMjE1XkEyXkFqcGc@._V1_.jpg" class="card-img-top"
+                <img src="https://m.media-amazon.com/images/M/MV5BNTU1MzgyMDMtMzBlZS00YzczLThmYWEtMjU3YmFlOWEyMjE1XkEyXkFqcGc@.V1.jpg" class="card-img-top"
                     alt="Harry Potter">
                 <div class="card-body">
                     <h5 class="card-title">Harry Potter</h5>
@@ -274,107 +151,6 @@
         </div>
     </div>
 </main>
-
-<!-- Modal -->
-<div class="modal fade" id="filmModal" tabindex="-1" aria-labelledby="filmModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="filmModalLabel"></h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <img id="filmModalImage" src="" alt="" class="img-fluid mb-3">
-                <p id="filmModalDescription"></p>
-                <p><strong>Genre:</strong> <span id="filmModalGenre"></span></p>
-                <p><strong>Actors:</strong> <span id="filmModalActors"></span></p>
-                <p><strong>Rating:</strong> <span id="filmModalRating"></span></p>
-                <h6>User Reviews:</h6>
-                <div id="filmModalReviews" class="reviews-container">
-                    <!-- Reviews will be inserted here -->
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- CSS for Review Bubbles -->
-<style>
-    .review-bubble {
-        background-color: #21467e;
-        border-radius: 15px;
-        padding: 10px;
-        margin: 10px 0;
-        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-    }
-    .review-bubble strong {
-        color: #ede5e5;
-    }
-    .star {
-        color: gold;
-        font-size: 1rem;
-    }
-</style>
-
-<!-- JavaScript -->
-<script>
-    const filmCards = document.querySelectorAll('.film-card');
-    filmCards.forEach(card => {
-        card.addEventListener('click', () => {
-            const title = card.getAttribute('data-bs-title');
-            const description = card.getAttribute('data-bs-description');
-            const genre = card.getAttribute('data-bs-genre');
-            const actors = card.getAttribute('data-bs-actors');
-            const rating = card.getAttribute('data-bs-rating');
-            const reviews = card.getAttribute('data-bs-reviews');
-            const imageSrc = card.querySelector('img').getAttribute('src');
-
-            document.getElementById('filmModalLabel').innerText = title;
-            document.getElementById('filmModalDescription').innerText = description;
-            document.getElementById('filmModalGenre').innerText = genre;
-            document.getElementById('filmModalActors').innerText = actors;
-            document.getElementById('filmModalRating').innerText = rating;
-            document.getElementById('filmModalImage').src = imageSrc;
-
-            const reviewsContainer = document.getElementById('filmModalReviews');
-            reviewsContainer.innerHTML = '';
-
-            // Parse and insert reviews dynamically with star ratings
-            const reviewList = reviews.split(';');
-            reviewList.forEach(review => {
-                const [user, stars, comment] = review.split(',').map(item => item.trim());
-                const reviewBubble = document.createElement('div');
-                reviewBubble.classList.add('review-bubble');
-                let starIcons = '★'.repeat(parseInt(stars)).padEnd(5, '☆');
-                reviewBubble.innerHTML = `<strong>${user}</strong> <span class="star">${starIcons}</span><br>${comment}`;
-                reviewsContainer.appendChild(reviewBubble);
-            });
-        });
-    });
-</script>
-
-        <!-- All Reviews Section -->
-        <div id="reviews-section">
-            <h2 class="text-center">All Reviews</h2>
-            <div id="reviews-list"></div>
-        </div>
-    </main>
-
-    <!-- Film Modal -->
-    <div class="modal fade" id="filmModal" tabindex="-1" aria-labelledby="filmModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="filmModalLabel"></h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p id="modal-description"></p>
-                    <div id="reviews-list"></div>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- Footer -->
     <footer class="footer py-3">
@@ -388,115 +164,11 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const genreItems = document.querySelectorAll('.dropdown-item');
-            const filmCards = document.querySelectorAll('.film-card');
-            const homeButton = document.getElementById('home-button');
-            const reviewsLink = document.getElementById('reviews-link');
-            const reviewsSection = document.getElementById('reviews-section');
-            const reviewsList = document.getElementById('reviews-list');
-
-            genreItems.forEach(item => {
-                item.addEventListener('click', (e) => {
-                    const selectedGenre = e.target.getAttribute('data-genre');
-                    filmCards.forEach(card => {
-                        const cardGenres = card.getAttribute('data-genre').split(', ');
-                        if (cardGenres.includes(selectedGenre)) {
-                            card.style.display = 'block';
-                        } else {
-                            card.style.display = 'none';
-                        }
-                    });
-                });
-            });
-
-            homeButton.addEventListener('click', () => {
-                filmCards.forEach(card => {
-                    card.style.display = 'block';
-                });
-                reviewsSection.style.display = 'none';
-            });
-
-            reviewsLink.addEventListener('click', () => {
-                reviewsSection.style.display = 'block';
-                filmCards.forEach(card => card.style.display = 'none');
-                reviewsList.innerHTML = '';
-                const reviews = [
-                    { movie: 'The Conjuring', user: 'Alice', rating: 5, review: 'Terrifying atmosphere' },
-                    { movie: 'The Conjuring', user: 'John', rating: 4, review: 'Great performances' },
-                    { movie: 'The Conjuring', user: 'Sam', rating: 3, review: 'A true horror masterpiece' },
-                    { movie: 'Inception', user: 'Mark', rating: 5, review: 'Briliant concept' },
-                    { movie: 'Inception', user: 'Sarah', rating: 4, review: 'Visually stunning' },
-                    { movie: 'Inception', user: 'Dan', rating: 4, review: 'Keeps you thinking' },
-                    { movie: 'The Notebook', user: 'Emma', rating: 5, review: 'Beautifully emotional' },
-                    { movie: 'The Notebook', user: 'Jake', rating: 4, review: 'A romantic classic' },
-                    { movie: 'Frozen', user: 'Jungwon', rating: 5, review: 'A magical and heartwarming story' },
-                    { movie: 'Frozen', user: 'Suga', rating: 4, review: 'A visually stunning adventure' },
-                    { movie: 'Lovely Runner', user: 'Aulia', rating: 4, review: 'A compelling and heartfelt drama' },
-                    { movie: 'Lovely Runner', user: 'Thalita', rating: 5, review: 'Inspiring and emotional' },
-                    { movie: 'Lovely Runner', user: 'Salsabhila', rating: 4, review: 'Great performances' },
-                    { movie: 'Harry Potter', user: 'Mikha', rating: 5, review: 'Magical and unforgettable' },
-                    { movie: 'Harry Potter', user: 'Sunghoon', rating: 4, review: 'Fun and adventurous' },
-                    { movie: 'Harry Potter', user: 'Jihyo', rating: 5, review: 'A childhood favorite' },
-                ];
-
-                reviews.forEach(r => {
-                    const reviewCard = document.createElement('div');
-                    reviewCard.classList.add('review-card');
-                    reviewCard.innerHTML = `
-                        <div class="user-name">${r.user}</div>
-                        <div class="star-rating">
-                            ${'<i class="fas fa-star text-warning"></i>'.repeat(r.rating)}
-                            ${'<i class="fas fa-star text-muted"></i>'.repeat(5 - r.rating)}
-                        </div>
-                        <p><strong>${r.movie}</strong>: ${r.review}</p>
-                    `;
-                    reviewsList.appendChild(reviewCard);
-                });
-            });
-
-            filmCards.forEach(card => {
-                card.addEventListener('click', (e) => {
-                    const title = e.currentTarget.getAttribute('data-bs-title');
-                    const description = e.currentTarget.getAttribute('data-bs-description');
-                    const reviews = e.currentTarget.getAttribute('data-bs-reviews');
-                    const genre = e.currentTarget.getAttribute('data-bs-genre');
-                    const rating = e.currentTarget.getAttribute('data-bs-rating');
-
-                    const modalTitle = document.querySelector('.modal-title');
-                    const modalDescription = document.getElementById('modal-description');
-                    const modalReviews = document.getElementById('reviews-list');
-
-                    modalTitle.textContent = title;
-                    modalDescription.textContent = description;
-
-                    modalReviews.innerHTML = '';
-
-                    const reviewArray = reviews.split('; ');
-                    reviewArray.forEach(r => {
-                        const [user, rating, review] = r.split(', ');
-                        const reviewElement = document.createElement('div');
-                        reviewElement.classList.add('review');
-                        reviewElement.innerHTML = `
-                            <div class="user-name">${user}</div>
-                            <div class="star-rating">
-                                ${'<i class="fas fa-star text-warning"></i>'.repeat(Number(rating))}
-                                ${'<i class="fas fa-star text-muted"></i>'.repeat(5 - Number(rating))}
-                            </div>
-                            <p>${review}</p>
-                        `;
-                        modalReviews.appendChild(reviewElement);
-                    });
-                });
-            });
-        });
-
         
         document.addEventListener('DOMContentLoaded', () => {
             const genreItems = document.querySelectorAll('.dropdown-item');
             const filmCards = document.querySelectorAll('.film-card');
             const homeButton = document.getElementById('home-button');
-            const reviewsLink = document.getElementById('reviews-link');
             const reviewsSection = document.getElementById('reviews-section');
             const reviewsList = document.getElementById('reviews-list');
             const searchBar = document.querySelector('.search-bar');
@@ -522,31 +194,6 @@
                     card.style.display = 'block';
                 });
                 reviewsSection.style.display = 'none';
-            });
-
-            // Event listener untuk Reviews
-            reviewsLink.addEventListener('click', () => {
-                reviewsSection.style.display = 'block';
-                filmCards.forEach(card => card.style.display = 'none');
-                reviewsList.innerHTML = '';
-                const reviews = [
-                    { movie: 'The Conjuring', user: 'Alice', rating: 5, review: 'Terrifying atmosphere' },
-                    { movie: 'Inception', user: 'Mark', rating: 5, review: 'Brilliant concept' },
-                    { movie: 'The Notebook', user: 'Emma', rating: 5, review: 'Beautifully emotional' },
-                    { movie: 'Frozen', user: 'Jungwon', rating: 5, review: 'A magical and heartwarming story' },
-                    { movie: 'Harry Potter', user: 'Mikha', rating: 5, review: 'Magical and unforgettable' },
-                ];
-                reviews.forEach(({ movie, user, rating, review }) => {
-                    const reviewCard = document.createElement('div');
-                    reviewCard.classList.add('review-card');
-                    reviewCard.innerHTML = `
-                        <p><strong>Movie:</strong> ${movie}</p>
-                        <p><strong>User:</strong> ${user}</p>
-                        <p><strong>Rating:</strong> ${'★'.repeat(rating)} ${'☆'.repeat(5 - rating)}</p>
-                        <p>${review}</p>
-                    `;
-                    reviewsList.appendChild(reviewCard);
-                });
             });
 
             // Event listener untuk pencarian
