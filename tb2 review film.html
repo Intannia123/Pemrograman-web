@@ -490,6 +490,79 @@
                 });
             });
         });
+
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            const genreItems = document.querySelectorAll('.dropdown-item');
+            const filmCards = document.querySelectorAll('.film-card');
+            const homeButton = document.getElementById('home-button');
+            const reviewsLink = document.getElementById('reviews-link');
+            const reviewsSection = document.getElementById('reviews-section');
+            const reviewsList = document.getElementById('reviews-list');
+            const searchBar = document.querySelector('.search-bar');
+
+            // Event listener untuk dropdown genre
+            genreItems.forEach(item => {
+                item.addEventListener('click', (e) => {
+                    const selectedGenre = e.target.getAttribute('data-genre');
+                    filmCards.forEach(card => {
+                        const cardGenres = card.getAttribute('data-genre').split(', ');
+                        if (cardGenres.includes(selectedGenre)) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+
+            // Event listener untuk tombol Home
+            homeButton.addEventListener('click', () => {
+                filmCards.forEach(card => {
+                    card.style.display = 'block';
+                });
+                reviewsSection.style.display = 'none';
+            });
+
+            // Event listener untuk Reviews
+            reviewsLink.addEventListener('click', () => {
+                reviewsSection.style.display = 'block';
+                filmCards.forEach(card => card.style.display = 'none');
+                reviewsList.innerHTML = '';
+                const reviews = [
+                    { movie: 'The Conjuring', user: 'Alice', rating: 5, review: 'Terrifying atmosphere' },
+                    { movie: 'Inception', user: 'Mark', rating: 5, review: 'Brilliant concept' },
+                    { movie: 'The Notebook', user: 'Emma', rating: 5, review: 'Beautifully emotional' },
+                    { movie: 'Frozen', user: 'Jungwon', rating: 5, review: 'A magical and heartwarming story' },
+                    { movie: 'Harry Potter', user: 'Mikha', rating: 5, review: 'Magical and unforgettable' },
+                ];
+                reviews.forEach(({ movie, user, rating, review }) => {
+                    const reviewCard = document.createElement('div');
+                    reviewCard.classList.add('review-card');
+                    reviewCard.innerHTML = `
+                        <p><strong>Movie:</strong> ${movie}</p>
+                        <p><strong>User:</strong> ${user}</p>
+                        <p><strong>Rating:</strong> ${'★'.repeat(rating)} ${'☆'.repeat(5 - rating)}</p>
+                        <p>${review}</p>
+                    `;
+                    reviewsList.appendChild(reviewCard);
+                });
+            });
+
+            // Event listener untuk pencarian
+            searchBar.addEventListener('input', () => {
+                const searchText = searchBar.value.toLowerCase();
+                filmCards.forEach(card => {
+                    const title = card.querySelector('.card-title').textContent.toLowerCase();
+                    if (title.includes(searchText)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
     </script>
 </body>
 
